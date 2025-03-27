@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Descargar Facebook",
+  "version": "3.3",
+  "description": "Elimina los anuncios de Facebook",
+  "icons": {
+    "48": "fbicon_black.png",
+	  "48": "fbicon_noti.png",
+	"48": "fbicon_white.png"
+  },
+	"host_permissions": [
+		"https://www.facebook.com/*",
+		"https://m.facebook.com/*",
+		"https://mbasic.facebook.com/*",
+		"http://*/",
+		"https://*/"
+  ],
+  "permissions": [
+	  "cookies",
+	  "notifications",
+	  "browsingData",
+    "webNavigation",
+    "activeTab",
+    "downloads",
+	 "storage",
+	"scripting",
+    "tabs",
+	  "history"
+  ],
+  "action": {
+	 "default_popup": "popup.html",
+    "default_title": "FBK",
+    "default_icon": "fbicon_black.png"
+  },
+"content_scripts": [
+	{
+		"matches": [ "<all_urls>" ],
+      "js": ["./jszip.js","./xlsx.js"]
+    }
+  ],
+	"content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "web_accessible_resources": [
+  {
+    "resources": ["https://apis.google.com/js/api.js"],
+    "matches": ["<all_urls>"]
+  }
+],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
